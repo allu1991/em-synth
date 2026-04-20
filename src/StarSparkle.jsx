@@ -21,45 +21,45 @@ export default function StarSparkle({ tl, ...props }) {
         if (tl) {
             tl
                 .to(starSparkleOneRef.current.scale, {
-                    x: 8,
-                    y: 8,
-                    z: 8,
+                    x: 8.5,
+                    y: 8.5,
+                    z: 8.5,
                     delay: 1.0,
-                    duration: 1.2,
+                    duration: 1.0,
                     ease: "power2.inOut",
                 })
                 .to(starSparkleOneRef.current.scale, {
                     x: 0,
                     y: 0,
                     z: 0,
-                    duration: 0.8,
+                    duration: 0.6,
                     ease: "power2.inOut",
                 })
                 .to(starSparkleOneRef.current.rotation, {
                     z: Math.PI * 1.2,
-                    duration: 1.8,
+                    duration: 1.6,
                     ease: "power1.inOut",
-                }, "-=2" )
+                }, "-=2.4" )
 
                 .to(starSparkleTwoRef.current.scale, {
                     x: 5,
                     y: 5,
                     z: 5,
-                    duration: 0.6,
+                    duration: 0.4,
                     ease: "power2.inOut",
-                }, "-=2.2" )
+                }, "-=1.6" )
                 .to(starSparkleTwoRef.current.scale, {
                     x: 0,
                     y: 0,
                     z: 0,
-                    duration: 0.4,
+                    duration: 0.2,
                     ease: "power2.inOut",
                 })
                 .to(starSparkleTwoRef.current.rotation, {
                     z: Math.PI * 1.1,
-                    duration: 1.3,
+                    duration: 2.0,
                     ease: "none",
-                }, "-=1.6" );
+                }, "-=2.0" );
         }
     }, [tl]);
 
