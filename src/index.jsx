@@ -1,4 +1,4 @@
-import './style.css'
+import './style.scss'
 import ReactDOM from 'react-dom/client'
 import { StrictMode } from 'react'
 import { Canvas } from '@react-three/fiber'

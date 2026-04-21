@@ -1,0 +1,15 @@
+html,
+body,
+#root {
+    --c_cyan: #72c9f9;
+    --c_neon_blue: #343eff;
+    --c_neon_purple: #f212d7;
+    --c_neon_yellow: #fcfc59;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000314;
+}
