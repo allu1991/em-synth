@@ -14,6 +14,8 @@ export default function Options() {
     const {
         isFreeCamera,
         setIsFreeCamera,
+        isPerformanceMonitorOpen,
+        setIsPerformanceMonitorOpen,
         isDebugMenuOpen,
         setIsDebugMenuOpen,
         noiseFilterEnabled,
@@ -65,6 +67,10 @@ export default function Options() {
         setIsFreeCamera(!isFreeCamera);
     }
 
+    const togglePerformanceMonitor = () => {
+        setIsPerformanceMonitorOpen(!isPerformanceMonitorOpen);
+    }
+
     const toggleDebugMenu = () => {
         setIsDebugMenuOpen(!isDebugMenuOpen);
     }
@@ -113,6 +119,16 @@ export default function Options() {
                                 type="checkbox"
                                 checked={isFreeCamera}
                                 onChange={toggleIsFreeCamera}
+                            />
+                            <span className="checkmark"></span>
+                        </label>
+
+                        <label className="label-container" id="options-performance-monitor">
+                            <span className="input-label">Performance monitor</span>
+                            <input
+                                type="checkbox"
+                                checked={isPerformanceMonitorOpen}
+                                onChange={togglePerformanceMonitor}
                             />
                             <span className="checkmark"></span>
                         </label>

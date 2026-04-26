@@ -1,5 +1,4 @@
 import { PerspectiveCamera, OrbitControls, PresentationControls } from '@react-three/drei'
-import { Perf } from 'r3f-perf'
 import { Suspense, useRef, useEffect, useState, useLayoutEffect, useMemo } from 'react'
 import Camera from './Camera.jsx'
 import EnvironmentEffect from './EnvironmentEffect.jsx'
@@ -76,8 +75,6 @@ export default function App() {
             https://codesandbox.io/p/sandbox/react-three-fiber-particles-ii-moio2?file=%2Fsrc%2Findex.js%3A145%2C67
             https://medium.com/@mattdesl/filmic-effects-for-webgl-9dab4bc899dc
         */}
-
-        {/* <Perf position="top-left" /> */}
 
         <Camera />
         <EnvironmentEffect />
