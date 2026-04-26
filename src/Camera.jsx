@@ -1,9 +1,11 @@
 import { PerspectiveCamera, OrbitControls } from '@react-three/drei'
-import { useState, useRef, useLayoutEffect } from 'react'
+import { useState, useRef, useLayoutEffect, useContext } from 'react'
+import { EffectsContext } from './index.jsx'
 
 export default function Camera({ tl }) {
 
     const cameraRef = useRef()
+    const { isFreeCamera } = useContext(EffectsContext)
 
     const [cameraAnimDone, setCameraAnimDone] = useState(false);
 
@@ -61,15 +63,15 @@ export default function Camera({ tl }) {
         
         <OrbitControls
             makeDefault
-            // enablePan={ true }
-            // enableZoom={ true }
-            // enableDamping
-            // dampingFactor={ 0.05 }
-            // rotateSpeed={ 0.7 }
-            // minPolarAngle={ Math.PI / 2.5 }
-            // maxPolarAngle={ Math.PI / 1.8 }
-            // minAzimuthAngle={ -Math.PI / 7.5 }
-            // maxAzimuthAngle={ Math.PI / 7.5 }
+            enableDamping
+            dampingFactor={ 0.05 }
+            rotateSpeed={ 0.7 }
+            enablePan={ isFreeCamera }
+            enableZoom={ isFreeCamera }
+            minPolarAngle={ isFreeCamera ? 0 : Math.PI / 2.5 }
+            maxPolarAngle={ isFreeCamera ? Math.PI : Math.PI / 1.8 }
+            minAzimuthAngle={ isFreeCamera ? -Math.PI : -Math.PI / 7.5 }
+            maxAzimuthAngle={ isFreeCamera ? Math.PI : Math.PI / 7.5 }
         />
     </>
 }

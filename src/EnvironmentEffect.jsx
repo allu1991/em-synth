@@ -1,12 +1,18 @@
 import { Environment } from '@react-three/drei'
 import { useControls } from 'leva'
 import * as THREE from 'three'
-import { Suspense, useRef, useEffect, useState, useLayoutEffect, useMemo } from 'react'
+import { Suspense, useRef, useContext, useEffect, useState, useLayoutEffect, useMemo } from 'react'
 import { useLoader, useFrame } from '@react-three/fiber'
 import { EffectComposer, Bloom, Noise, ChromaticAberration } from '@react-three/postprocessing'
 import { KernelSize, Resolution } from 'postprocessing'
+import { EffectsContext } from './index.jsx'
 
 export default function EnvironmentEffect({ tl }) {
+
+    const {
+        noiseFilterEnabled,
+        chromaticAberrationEnabled,
+    } = useContext(EffectsContext);
 
     const bgRef = useRef()
     const envRef = useRef()
@@ -83,10 +89,12 @@ export default function EnvironmentEffect({ tl }) {
         />
 
         <EffectComposer>
-            {/* <Noise
-                opacity={ 0.2 }
-                premultiply={ false }
-            /> */}
+            { noiseFilterEnabled && (
+                <Noise
+                    opacity={ 0.2 }
+                    premultiply={ false }
+                />
+            )}
 
             {/* Two bloom layers to create a stronger bloom effect,
             since the default bloom is quite subtle */}
@@ -111,10 +119,12 @@ export default function EnvironmentEffect({ tl }) {
                 resolutionY={ Resolution.AUTO_SIZE }
             />
 
-            {/* <ChromaticAberration
-                blendFunction={ 1 }
-                offset={ [ 0.00125, 0.00125 ] }
-            /> */}
+            { chromaticAberrationEnabled && (
+                <ChromaticAberration
+                    blendFunction={ 1 }
+                    offset={ [ 0.00125, 0.00125 ] }
+                />
+            )}
         </EffectComposer>
 
         {/* <directionalLight

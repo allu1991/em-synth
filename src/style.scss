@@ -17,15 +17,352 @@
 html,
 body,
 #root {
-    --c_cyan: #72c9f9;
-    --c_neon_blue: #343eff;
-    --c_neon_purple: #f212d7;
-    --c_neon_yellow: #fcfc59;
-
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000314;
+}
+
+html {
+    --c_black: #000314;
+    --c_cyan: #72c9f9;
+    --c_neon_blue: #343eff;
+    --c_neon_purple: #f212d7;
+    --c_neon_yellow: #fcfc59;
+
+    background: var(--c_black);
+    color: var(--c_cyan);
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Teko', Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    color: var(--c_neon_purple);
+    letter-spacing: 0.2rem;
+    font-family: 'Da Streets', Helvetica, sans-serif;
+}
+
+/* OPTIONS */
+.options {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100000000;
+
+    &__toggle-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        padding: 15px;
+        transition: transform 0.3s ease;
+
+        img {
+            transition: transform 0.3s ease;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        &:hover,
+        &.active {
+            transform: scale(1.15);
+    
+            img {
+                transform: rotate(90deg);
+            }
+        }
+
+        &.active {
+            background-color: var(--c_neon_purple);
+        }
+    }
+
+    &__modal {
+        width: calc(100vw - 120px);
+        height: calc(100vh - 120px);
+        max-width: 300px;
+        max-height: 360px;
+        position: absolute;
+        bottom: 65px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 2.5rem;
+        padding-left: calc(2.5rem + 5px);
+        animation: modalReveal 0.2s ease-out;
+
+        @media (max-width: 768px) {
+            width: calc(100vw - 110px);
+            right: 0;
+            padding: 2rem;
+            padding-left: calc(2rem + 5px);
+        }
+
+        @supports (corner-shape: square) {
+            border-radius: 40px;
+            corner-shape: square square bevel square;
+        }
+
+        &::before {
+            content: "";
+            opacity: 0.3;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: calc(100% - 10px);
+            height: calc(100% - 10px);
+            background: linear-gradient(
+                160deg,
+                var(--c_neon_blue) 0%,
+                rgba(255, 255, 255, 0) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+
+            @supports (corner-shape: square) {
+                border-radius: 40px;
+                corner-shape: square square bevel square;
+            }
+        }
+
+        @keyframes modalReveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            } to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalItemsReveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            } to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        &--borders {
+            z-index: 10;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            user-select: none;
+            pointer-events: none;
+            position: absolute;
+            background: transparent;
+
+            @supports (corner-shape: square) {
+                border-radius: 40px;
+                corner-shape: square square bevel square;
+            }
+
+            @keyframes borderPurpleReveal {
+                from {
+                    transform: translateY(0);
+                } to {
+                    transform: translate(4px, -4px);
+                }
+            }
+
+            @keyframes borderCyanReveal {
+                from {
+                    transform: translateY(0);
+                } to {
+
+                    transform: translate(-4px, 4px);
+                }
+            }
+
+            .border-purple,
+            .border-cyan {
+                z-index: 1;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                box-sizing: border-box;
+                background: transparent;
+                corner-shape: square square bevel square;
+                border: solid 2px;
+
+                @supports (corner-shape: square) {
+                    corner-shape: square square bevel square;
+                }
+            }
+
+            .border-purple {
+                border-color: var(--c_neon_purple);
+                animation: borderPurpleReveal 0.25s 0.25s ease-out forwards;
+
+                @supports (corner-shape: square) {
+                     border-radius: 45px;
+                }
+            }
+
+            .border-cyan {
+                border-color: var(--c_cyan);
+                animation: borderCyanReveal 0.25s 0.25s ease-out forwards;
+
+                @supports (corner-shape: square) {
+                    border-radius: 30px;
+                }
+            }
+        }
+
+        &--inner {
+            display: flex;
+            flex-direction: column;
+
+            > * {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: modalItemsReveal 0.2s 0s ease-out forwards;
+
+                 &:nth-of-type(1) {
+                    animation-delay: 0.05s;
+                }
+                &:nth-of-type(2) {
+                    animation-delay: 0.1s;
+                }
+                &:nth-of-type(3) {
+                    animation-delay: 0.15s;
+                }
+                &:nth-of-type(4) {
+                    animation-delay: 0.2s;
+                }
+                &:nth-of-type(5) {
+                    animation-delay: 0.25s;
+                }
+                &:nth-of-type(6) {
+                    animation-delay: 0.3s;
+                }
+            }
+        }
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+
+        @media (max-width: 768px) {
+            font-size: 2.0rem;
+        }
+    }
+
+    .label-container {
+        padding: 3px 8px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        margin-left: -10px;
+        margin-bottom: 0.2rem;
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid transparent;
+
+        @supports (corner-shape: square) {
+            border-radius: 10px;
+            corner-shape: square square bevel square;
+        }
+
+        &#options-noise-filter {
+            margin-top: 1.75rem;
+        }
+
+        &.inactive {
+            opacity: 0.5;
+            user-select: none;
+            pointer-events: none;
+            filter: grayscale(1);
+        }
+
+        .input-label {
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03rem;
+            position: relative;
+            display: inline-block;
+
+            @media (max-width: 768px) {
+                font-size: 1.45rem;
+            }
+        }
+
+        // Hide the browser's default checkbox
+        input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+
+            // When the checkbox is checked, show the checkmark
+            &:checked {
+                ~ .checkmark {
+                    &:after {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        // Create a custom checkbox
+        .checkmark {
+            position: relative;
+            top: 0;
+            right: 0;
+            height: 23px;
+            width: 23px;
+            border: 1px solid var(--c_neon_purple);
+
+            @supports (corner-shape: square) {
+                border-radius: 6px;
+                corner-shape: square square bevel square;
+            }
+
+            // Create the checkmark/indicator (hidden when not checked)
+            &:after {
+                content: "";
+                display: none;
+                position: absolute;
+                left: 7px;
+                top: 1px;
+                width: 7px;
+                height: 12px;
+                border: solid var(--c_neon_purple);
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+
+
+        &:hover {
+            border-color: var(--c_cyan);
+
+            // input ~ .checkmark {
+            //     background-color: $c_cyan;
+            // }
+        }
+    }
 }
