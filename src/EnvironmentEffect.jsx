@@ -1,63 +1,39 @@
 import { Environment } from '@react-three/drei'
 import { useControls } from 'leva'
-import * as THREE from 'three'
-import { Suspense, useRef, useContext, useEffect, useState, useLayoutEffect, useMemo } from 'react'
-import { useLoader, useFrame } from '@react-three/fiber'
+import { useRef, useContext } from 'react'
 import { EffectComposer, Bloom, Noise, ChromaticAberration } from '@react-three/postprocessing'
 import { KernelSize, Resolution } from 'postprocessing'
 import { EffectsContext } from './index.jsx'
 
 export default function EnvironmentEffect({ tl }) {
 
+    // Get the effect states from the context
     const {
         noiseFilterEnabled,
         chromaticAberrationEnabled,
     } = useContext(EffectsContext);
 
+    // Create refs for the environment and background to allow for future manipulations if needed
     const bgRef = useRef()
     const envRef = useRef()
 
-    // Leva controls for the environment background rotation
+    // Leva controls for the background rotation
     const { rotationX_bg, rotationY_bg, rotationZ_bg } = useControls('Background', {
         rotationX_bg: { value: 0.0, min: -Math.PI, max: Math.PI, step: 0.01 },
         rotationY_bg: { value: 0.54, min: -Math.PI, max: Math.PI, step: 0.01 },
         rotationZ_bg: { value: 1.6, min: -Math.PI, max: Math.PI, step: 0.01 },
     })
 
+    // Leva controls for the environment map rotation
     const { rotationX_env, rotationY_env, rotationZ_env } = useControls('Environment', {
         rotationX_env: { value: -0.8, min: -Math.PI, max: Math.PI, step: 0.01 },
         rotationY_env: { value: 0.08, min: -Math.PI, max: Math.PI, step: 0.01 },
         rotationZ_env: { value: -1.4, min: -Math.PI, max: Math.PI, step: 0.01 },
-        // rotationX_env: { value: 0.26, min: -Math.PI, max: Math.PI, step: 0.01 },
-        // rotationY_env: { value: 0.08, min: -Math.PI, max: Math.PI, step: 0.01 },
-        // rotationZ_env: { value: -0.2, min: -Math.PI, max: Math.PI, step: 0.01 },
-        // Old values
-        // rotationX_env: { value: -2.7, min: -Math.PI, max: Math.PI, step: 0.01 },
-        // rotationY_env: { value: 0.0, min: -Math.PI, max: Math.PI, step: 0.01 },
-        // rotationZ_env: { value: 0.0, min: -Math.PI, max: Math.PI, step: 0.01 },
     })
-
-    // useLayoutEffect(() => {
-    //     if (tl) {
-    //         console.log(bgRef.current);
-
-    //         tl.from(bgRef.current.rotation, {
-    //             x: 2.40,
-    //             y: -0.25,
-    //             z: -1.4,
-    //             duration: 5,
-    //             ease: "power2.inOut",
-    //         })
-    //     }
-    // }, [tl]);
-
-    // useFrame(() => {
-        // Rotate the background and environment slowly over time
-        // rotationY_env += 10 * 10.01
-    // })
 
     return <>
 
+        {/* Add fog to the scene for depth and atmosphere. The color and density can be adjusted as needed */}
         <fog attach="fog" args={['#000314', 5, 25]} />
 
         {/* LDR equirectangular texture */}
@@ -69,16 +45,6 @@ export default function EnvironmentEffect({ tl }) {
             files={ [ './textures/space-nebula.jpg' ]}
             environmentIntensity={ 3 }
         />
-
-        {/* Animatable version of the environment background, using a large sphere with a texture instead of the Environment component, since the Environment component doesn't allow for animating the background rotation */}
-        {/* <mesh ref={bgRef} rotation={[ 2.60, 0.25, -1.6 ]}>
-            <sphereGeometry args={[200, 64, 64]} />
-            <meshBasicMaterial
-                map={useLoader(THREE.TextureLoader, './textures/space-nebula.jpg')}
-                side={THREE.BackSide}
-                fog={false}
-            />
-        </mesh> */}
 
         <Environment
             ref={envRef}
@@ -126,12 +92,5 @@ export default function EnvironmentEffect({ tl }) {
                 />
             )}
         </EffectComposer>
-
-        {/* <directionalLight
-            shadow-normalBias={ 0.04}
-            castShadow position={ [ 1, 2, 3 ] }
-            intensity={ 4.5 }
-        />
-        <ambientLight intensity={ 1.5 } /> */}
     </>
 }
