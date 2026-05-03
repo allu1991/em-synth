@@ -10,12 +10,12 @@ export default function Stars(props) {
     // const starMap = useLoader(THREE.TextureLoader, './textures/star-particle.png');
     const starMap = useTexture('./textures/star-particle.png');
 
-    useFrame(() => {
+    useFrame((_, delta) => {
         if (pointsRef.current) {
             const positions = pointsRef.current.geometry.attributes.position;
             for (let i = 0; i < positions.count; i++) {
                 let z = positions.getZ(i);
-                z += 0.2 + Math.random() * 0.01;
+                z += (0.2 + Math.random() * 0.01) * delta * 60;
                 if (z > 20) {
                     z = -20;
                 }
