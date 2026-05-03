@@ -21,7 +21,8 @@ export default function Options() {
         noiseFilterEnabled,
         setNoiseFilterEnabled,
         chromaticAberrationEnabled,
-        setChromaticAberrationEnabled
+        setChromaticAberrationEnabled,
+        animationComplete,
     } = useContext(EffectsContext);
 
     // Close the options menu when clicking outside of it
@@ -85,13 +86,15 @@ export default function Options() {
 
     return (
         <aside className="options" ref={asideRef}>
-            <button
-                className={`options__toggle-button ${optionsOpen ? 'active' : ''}`}
-                onClick={() => setOptionsOpen(!optionsOpen)}
-                title={optionsOpen ? 'Close options' : 'Open options'}
-            >
-                <img src="./textures/icon-gear.svg" alt="" width="24" height="24" />
-            </button>
+            {animationComplete && (
+                <button
+                    className={`options__toggle-button ${optionsOpen ? 'active' : ''}`}
+                    onClick={() => setOptionsOpen(!optionsOpen)}
+                    title={optionsOpen ? 'Close options' : 'Open options'}
+                >
+                    <img src="./textures/icon-gear.svg" alt="" width="24" height="24" />
+                </button>
+            )}
 
             {optionsOpen && (
                 <div className='options__modal'>

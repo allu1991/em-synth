@@ -1,5 +1,6 @@
 import { PerspectiveCamera, OrbitControls, PresentationControls } from '@react-three/drei'
-import { Suspense, useRef, useEffect, useState, useLayoutEffect, useMemo } from 'react'
+import { Suspense, useRef, useEffect, useState, useLayoutEffect, useContext } from 'react'
+import { EffectsContext } from './index.jsx'
 import Camera from './Camera.jsx'
 import EnvironmentEffect from './EnvironmentEffect.jsx'
 import Grid from './Grid.jsx'
@@ -14,6 +15,9 @@ import LogoSlogan from './LogoSlogan.jsx'
 import { gsap } from 'gsap';
 
 export default function App() {
+
+    // Get the effect states and setters from the context
+    const { setAnimationComplete } = useContext(EffectsContext);
 
     // Use state for GSAP timelines
     const [gridAnim, setGridAnim] = useState(null);
@@ -41,7 +45,10 @@ export default function App() {
 
             // Create master timeline and add child timelines in sequence with overlaps
             gsap.timeline({
-                onComplete: () => console.log('Animation complete!'),
+                onComplete: () => {
+                    console.log('Animation complete!')
+                    setAnimationComplete(true)
+                },
             })
                 .add(starParticleAnim, "+=0.0")
                 .add(gridAnim, "-=0.0")
@@ -49,7 +56,7 @@ export default function App() {
                 .add(logoEverAnim, "-=0.4")
                 .add(logoMadeAnim, "-=1.3")
                 .add(logoSloganAnim, "-=1.3")
-                .add(triangleFlashAnim, "+=2.35");
+                .add(triangleFlashAnim, "+=1.5");
         }
     }, [starParticleAnim, gridAnim, triangleAnim, logoEverAnim, logoMadeAnim, logoSloganAnim, triangleFlashAnim]);
 

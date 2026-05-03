@@ -22,6 +22,7 @@ function Root() {
     const [isPerformanceMonitorOpen, setIsPerformanceMonitorOpen] = useState(false);
     const [noiseFilterEnabled, setNoiseFilterEnabled] = useState(true);
     const [chromaticAberrationEnabled, setChromaticAberrationEnabled] = useState(false);
+    const [animationComplete, setAnimationComplete] = useState(false);
 
     return (
         <EffectsContext.Provider value={{
@@ -34,7 +35,9 @@ function Root() {
             noiseFilterEnabled,
             setNoiseFilterEnabled,
             chromaticAberrationEnabled,
-            setChromaticAberrationEnabled
+            setChromaticAberrationEnabled,
+            animationComplete,
+            setAnimationComplete
         }}>
             <StrictMode>
                 <Leva hidden={!isDebugMenuOpen} />

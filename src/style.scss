@@ -66,6 +66,18 @@ h1, h2, h3 {
         cursor: pointer;
         padding: 15px;
         transition: transform 0.3s ease;
+        transform: scale(0.0) rotateZ(0deg);
+        animation: buttonReveal 0.45s 0.4s ease-out forwards;
+
+        @keyframes buttonReveal {
+            0% {
+                transform: scale(0.0) rotateZ(0deg);
+            } 50% {
+                transform: scale(1.5) rotateZ(90deg);
+            } 100% {
+                transform: scale(1) rotateZ(180deg);
+            }
+        }
 
         img {
             transition: transform 0.3s ease;
