@@ -8,12 +8,9 @@ import App from './App.jsx'
 import Options from './Options.jsx'
 import PanIndicator from './PanIndicator.jsx'
 
+// Create a context to share effect states and setters across components
 export const EffectsContext = createContext();
-
 const root = ReactDOM.createRoot(document.querySelector('#root'))
-
-// https://stackblitz.com/edit/gsap-react-basic-f48716-utkxi9?file=src%2Fcomponents%2FBox.js,src%2FApp.js
-// https://gsap.com/community/forums/topic/9002-read-this-first-how-to-create-a-codepen-demo/
 
 function Root() {
 
