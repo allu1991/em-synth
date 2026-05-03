@@ -3,10 +3,13 @@ import * as THREE from 'three'
 import { useTexture } from '@react-three/drei'
 
 export default function StarSparkle({ tl, ...props }) {
+
+    // Create refs for the two star sparkle meshes
     const starSparkleOneRef = useRef()
     const starSparkleTwoRef = useRef()
     const starParticle = useTexture('./textures/star-sparkle.png');
 
+    // Create a material for the star sparkles using the loaded texture
     const material = useMemo(() => (
         new THREE.MeshBasicMaterial({
             map: starParticle,
@@ -17,9 +20,11 @@ export default function StarSparkle({ tl, ...props }) {
         })
     ), [starParticle])
 
+    // Animate the star sparkles. Has two sparkles that scale up and rotate separately
     useLayoutEffect(() => {
         if (tl) {
             tl
+                // Sparkle one
                 .to(starSparkleOneRef.current.scale, {
                     x: 8.5,
                     y: 8.5,
@@ -41,6 +46,7 @@ export default function StarSparkle({ tl, ...props }) {
                     ease: "power1.inOut",
                 }, "-=2.4" )
 
+                // Sparkle two
                 .to(starSparkleTwoRef.current.scale, {
                     x: 5,
                     y: 5,
