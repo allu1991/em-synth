@@ -26,8 +26,7 @@ export default function Grid({ tl, ...props }) {
     // Animate the grid by moving it along the z-axis repeatedly to create a continuous traversing effect
     useFrame((state, delta) => {
         if (meshRef.current) {
-            meshRef.current.position.z += 0.06
-            // meshRef.current.position.z += delta * 22.5
+            meshRef.current.position.z += delta * 4
             if (meshRef.current.position.z > 0) {
                 meshRef.current.position.z = -22.5
             }
