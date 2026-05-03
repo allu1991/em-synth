@@ -1,43 +1,51 @@
-import React, { useRef, useEffect } from 'react'
-import * as THREE from 'three'
-import { useGLTF, Points, useTexture } from '@react-three/drei'
-import { useFrame, useLoader } from '@react-three/fiber'
+import React, { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+
+const STAR_COUNT = 1500;
+const STREAK_LENGTH = 0.3;
 
 export default function Stars(props) {
 
-    // Reference to the points object
-    const pointsRef = useRef();
-    const starMap = useTexture('./textures/star-particle.png');
+    // Reference to the line segments object
+    const linesRef = useRef();
 
     // Animate the stars by moving them along the z-axis repeatedly to create a continuous traversing effect
     useFrame((_, delta) => {
-        if (pointsRef.current) {
-            const positions = pointsRef.current.geometry.attributes.position;
-            for (let i = 0; i < positions.count; i++) {
-                let z = positions.getZ(i);
+        if (linesRef.current) {
+            const positions = linesRef.current.geometry.attributes.position;
+            for (let i = 0; i < STAR_COUNT; i++) {
+                let z = positions.getZ(i * 2);
                 z += (0.2 + Math.random() * 0.01) * delta * 60;
                 if (z > 20) {
                     z = -20;
                 }
-                positions.setZ(i, z);
+                positions.setZ(i * 2, z);
+                positions.setZ(i * 2 + 1, z + STREAK_LENGTH);
             }
             positions.needsUpdate = true;
         }
     });
 
-    // Generate random positions for the stars within a cube of size 40x40x40 centered at the origin
+    // Generate random positions for the stars within a cube of size 40x40x40 centered at the origin.
+    // Each star uses 2 vertices (start and end of streak) to form a line segment along z.
     const positions = React.useMemo(() => {
-        const arr = new Float32Array(1500 * 3);
-        for (let i = 0; i < 1500; i++) {
-            arr[i * 3 + 0] = Math.random() * 40 - 20;
-            arr[i * 3 + 1] = Math.random() * 40 - 20;
-            arr[i * 3 + 2] = Math.random() * 40 - 20;
+        const arr = new Float32Array(STAR_COUNT * 2 * 3);
+        for (let i = 0; i < STAR_COUNT; i++) {
+            const x = Math.random() * 40 - 20;
+            const y = Math.random() * 40 - 20;
+            const z = Math.random() * 40 - 20;
+            arr[i * 6 + 0] = x;
+            arr[i * 6 + 1] = y;
+            arr[i * 6 + 2] = z;
+            arr[i * 6 + 3] = x;
+            arr[i * 6 + 4] = y;
+            arr[i * 6 + 5] = z + STREAK_LENGTH;
         }
         return arr;
     }, []);
 
     return (
-        <points ref={pointsRef}>
+        <lineSegments ref={linesRef}>
             <bufferGeometry>
                 <bufferAttribute
                     attach="attributes-position"
@@ -46,14 +54,12 @@ export default function Stars(props) {
                     itemSize={3}
                 />
             </bufferGeometry>
-            <pointsMaterial
+            <lineBasicMaterial
                 color={0xffffff}
-                size={0.04}
-                sizeAttenuation
                 transparent
-                map={starMap}
+                opacity={0.8}
                 depthWrite={false}
             />
-        </points>
+        </lineSegments>
     );
 }
