@@ -116,7 +116,6 @@ export default function LogoSlogan({ tl, ...props }) {
             transform
             distanceFactor={ 3 }
             ref={ container }
-            portal={ container }
             // center
             // wrapperClass="label"
             // position={ [ 0.3, -1.6, 0.2 ] }
