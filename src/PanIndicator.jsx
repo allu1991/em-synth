@@ -28,10 +28,10 @@ export default function PanIndicator() {
         const handlePan = () => {
             console.log('User panned the screen, hiding pan indicator');
             setVisibilityClass('hidden');
-            window.removeEventListener('click', handlePan);
+            window.removeEventListener('pointerdown', handlePan);
         }
 
-        window.addEventListener('click', handlePan);
+        window.addEventListener('pointerdown', handlePan);
     }, [animationComplete]);
 
     return (
