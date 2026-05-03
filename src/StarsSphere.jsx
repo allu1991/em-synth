@@ -3,9 +3,12 @@ import * as THREE from 'three'
 import { useTexture } from '@react-three/drei'
 
 export default function StarsSphere(props) {
+
+    // Define the number of particles and the radius of the sphere
     const particleCount = 1000
     const radius = 150
 
+    // Create a geometry for the star particles, randomly distributing them on the surface of a sphere
     const geometry = useMemo(() => {
         const positions = new Float32Array(particleCount * 3)
 
@@ -46,6 +49,7 @@ export default function StarsSphere(props) {
 
     const pointsRef = useRef()
 
+    // Clean up the geometry and material when the component unmounts to prevent memory leaks
     useMemo(() => {
         return () => {
             geometry.dispose()
