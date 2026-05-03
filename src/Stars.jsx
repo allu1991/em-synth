@@ -5,11 +5,11 @@ import { useFrame, useLoader } from '@react-three/fiber'
 
 export default function Stars(props) {
 
+    // Reference to the points object
     const pointsRef = useRef();
-
-    // const starMap = useLoader(THREE.TextureLoader, './textures/star-particle.png');
     const starMap = useTexture('./textures/star-particle.png');
 
+    // Animate the stars by moving them along the z-axis repeatedly to create a continuous traversing effect
     useFrame((_, delta) => {
         if (pointsRef.current) {
             const positions = pointsRef.current.geometry.attributes.position;
@@ -25,10 +25,7 @@ export default function Stars(props) {
         }
     });
 
-    // useEffect(() => {
-    //     console.log(pointsRef.current)
-    // }, [pointsRef])
-
+    // Generate random positions for the stars within a cube of size 40x40x40 centered at the origin
     const positions = React.useMemo(() => {
         const arr = new Float32Array(1500 * 3);
         for (let i = 0; i < 1500; i++) {
@@ -54,9 +51,7 @@ export default function Stars(props) {
                 size={0.04}
                 sizeAttenuation
                 transparent
-                // map={new THREE.TextureLoader().load(window.location.pathname + './star-particle.png')}
                 map={starMap}
-                // alphaTest={0.5}
                 depthWrite={false}
             />
         </points>
