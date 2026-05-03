@@ -6,6 +6,7 @@ import { Perf } from 'r3f-perf'
 import { Leva } from 'leva'
 import App from './App.jsx'
 import Options from './Options.jsx'
+import PanIndicator from './PanIndicator.jsx'
 
 export const EffectsContext = createContext();
 
@@ -56,6 +57,7 @@ function Root() {
                     <App />
                 </Canvas>
                 <Options />
+                <PanIndicator />
             </StrictMode>
         </EffectsContext.Provider>
     )
