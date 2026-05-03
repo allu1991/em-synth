@@ -1,5 +1,5 @@
 import { PerspectiveCamera, OrbitControls } from '@react-three/drei'
-import { useState, useRef, useLayoutEffect, useContext } from 'react'
+import { useState, useRef, useLayoutEffect, useContext, useMemo } from 'react'
 import { EffectsContext } from './index.jsx'
 
 export default function Camera({ tl }) {
@@ -8,6 +8,10 @@ export default function Camera({ tl }) {
     const { isFreeCamera } = useContext(EffectsContext)
 
     const [cameraAnimDone, setCameraAnimDone] = useState(false);
+
+    const fov = useMemo(() => {
+        return window.matchMedia('(max-width: 768px)').matches ? 60 : 45;
+    }, []);
 
     // Animate the camera using GSAP timeline
     // useLayoutEffect(() => {
@@ -54,7 +58,7 @@ export default function Camera({ tl }) {
         <PerspectiveCamera
             ref={cameraRef}
             makeDefault
-            fov={45}
+            fov={fov}
             near={0.1}
             far={200}
             rotation={[0, 0, 0]}
