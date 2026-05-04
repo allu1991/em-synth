@@ -92,7 +92,7 @@ export default function Options() {
                     onClick={() => setOptionsOpen(!optionsOpen)}
                     title={optionsOpen ? 'Close options' : 'Open options'}
                 >
-                    <img src="./textures/icon-gear.svg" alt="" width="24" height="24" />
+                    <img src="./icons/icon-gear.svg" alt="" width="24" height="24" />
                 </button>
             )}
 

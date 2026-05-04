@@ -4,7 +4,7 @@ import { EffectsContext } from './index.jsx'
 export default function Loading() {
     return (
         <div className="loading">
-            <img src='/textures/icon-loading.svg' alt="Loading" />
+            <img src='/icons/icon-loading.svg' alt="Loading" />
         </div>
     );
 }

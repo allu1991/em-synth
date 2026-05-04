@@ -38,7 +38,7 @@ export default function PanIndicator() {
         <>
             { animationComplete && (
                 <aside className={`pan-indicator ${visibilityClass}`}>
-                    <img src='/textures/icon-pan.svg' alt="Pan the camera with mouse" />
+                    <img src='/icons/icon-pan.svg' alt="Pan the camera with mouse" />
                 </aside>
             )}
         </>

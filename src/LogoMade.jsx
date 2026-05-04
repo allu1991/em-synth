@@ -8,10 +8,6 @@ export default function LogoMade({ tl, ...props }) {
     // Load the glTF model
     const { nodes, materials } = useGLTF('/logo-made.glb')
 
-    // Load the matcap texture
-    const [matcap] = useLoader(THREE.TextureLoader, ['/textures/lionel_radison_3.png'])
-    matcap.colorSpace = THREE.SRGBColorSpace
-
     // Animate the logoEver using GSAP when the timeline (tl) is available
     useLayoutEffect(() => {
         if (tl) {
@@ -59,19 +55,16 @@ export default function LogoMade({ tl, ...props }) {
                     geometry={nodes['model-madeobj_1'].geometry}
                     material={materials['Metal-sides']}
                 >
-                    {/* <meshMatcapMaterial matcap={matcap} /> */}
                 </mesh>
                 <mesh
                     geometry={nodes['model-madeobj_2'].geometry}
                     material={materials['Metal-front']}
                 >
-                    {/* <meshMatcapMaterial matcap={matcap} /> */}
                 </mesh>
                 <mesh
                     geometry={nodes['model-madeobj_3'].geometry}
                     material={materials['Metal-edges']}
                 >
-                    {/* <meshMatcapMaterial matcap={matcap} /> */}
                 </mesh>
             </group>
         </group>
