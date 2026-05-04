@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client'
 import { Suspense, StrictMode, useState, createContext } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Perf } from 'r3f-perf'
+import { useProgress } from '@react-three/drei'
 import { Leva } from 'leva'
+import Loading from './Loading.jsx'
 import App from './App.jsx'
 import Options from './Options.jsx'
 import PanIndicator from './PanIndicator.jsx'
@@ -11,6 +13,12 @@ import PanIndicator from './PanIndicator.jsx'
 // Create a context to share effect states and setters across components
 export const EffectsContext = createContext();
 const root = ReactDOM.createRoot(document.querySelector('#root'))
+
+// A component to display the loading screen while assets are being loaded
+function LoadingScreen() {
+    const { active } = useProgress();
+    return active ? <Loading /> : null;
+}
 
 function Root() {
 
@@ -44,13 +52,11 @@ function Root() {
                 <Leva hidden={!isDebugMenuOpen} />
                 <Canvas>
                     { isPerformanceMonitorOpen && <Perf position="top-left" /> }
-
-                    {/* Implement lazy loading by wrapping the Model component with Suspense */}
-                    {/* A react component that will wait for the Model component to load */}
-                    <Suspense>
+                    <Suspense fallback={null}>
                         <App />
                     </Suspense>
                 </Canvas>
+                <LoadingScreen />
                 <Options />
                 <PanIndicator />
             </StrictMode>
