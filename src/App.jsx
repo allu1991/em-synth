@@ -60,43 +60,17 @@ export default function App() {
         }
     }, [starParticleAnim, gridAnim, triangleAnim, logoEverAnim, logoMadeAnim, logoSloganAnim, triangleFlashAnim]);
 
-    // useLayoutEffect(() => {
-    //     if (starParticleAnim && triangleAnim && logoEverAnim && logoMadeAnim && logoSloganAnim && triangleFlashAnim) {
-    //         // Create master timeline and add child timelines in sequence with overlaps
-    //         const master = gsap.timeline({
-    //             onComplete: () => console.log('Animation complete!'),
-    //         })
-    //         // Set the master timeline to state so it can be passed down to child components
-    //         setTheTimeline(master);
-    //     }
-    // }, [starParticleAnim, triangleAnim, logoEverAnim, logoMadeAnim, logoSloganAnim, triangleFlashAnim]);
-
-    // useEffect(() => {
-    //     return () => {
-    //         tl.kill()
-    //     }
-    // }, [tl])
-
     return <>
-        {/*
-            https://codesandbox.io/p/sandbox/react-three-fiber-particles-ii-moio2?file=%2Fsrc%2Findex.js%3A145%2C67
-            https://medium.com/@mattdesl/filmic-effects-for-webgl-9dab4bc899dc
-        */}
-
         <Camera />
         <EnvironmentEffect />
 
-        {/* Implement lazy loading by wrapping the Model component with Suspense */}
-        {/* A react component that will wait for the Model component to load */}
-        <Suspense>
-            <Grid tl={gridAnim} />
-            <Stars />
-            <StarsSphere />
-            <StarSparkle scale={ 0 } position={ [ 0.0, -0.4, -100 ] } tl={starParticleAnim} />
-            <Triangle scale={ 1.1 } position={ [ 0.0, -0.4, -0.2 ] } tl={triangleAnim} tlTwo={triangleFlashAnim} />
-            <LogoEver scale={ 1 } position={ [ 0, 0.5, -0.1 ] } tl={logoEverAnim} />
-            <LogoMade scale={ 1 } position={ [ 0, -0.4, 0.1 ] } tl={logoMadeAnim} />
-            <LogoSlogan scale={ 1 } position={ [ 0.4, -1.1, 0.2 ] } tl={logoSloganAnim} />
-        </Suspense>
+        <Grid tl={gridAnim} />
+        <Stars />
+        <StarsSphere />
+        <StarSparkle scale={ 0 } position={ [ 0.0, -0.4, -100 ] } tl={starParticleAnim} />
+        <Triangle scale={ 1.1 } position={ [ 0.0, -0.4, -0.2 ] } tl={triangleAnim} tlTwo={triangleFlashAnim} />
+        <LogoEver scale={ 1 } position={ [ 0, 0.5, -0.1 ] } tl={logoEverAnim} />
+        <LogoMade scale={ 1 } position={ [ 0, -0.4, 0.1 ] } tl={logoMadeAnim} />
+        <LogoSlogan scale={ 1 } position={ [ 0.4, -1.1, 0.2 ] } tl={logoSloganAnim} />
     </>
 }
