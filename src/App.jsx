@@ -53,9 +53,9 @@ export default function App() {
                 .add(starParticleAnim, "+=0.0")
                 .add(gridAnim, "-=0.0")
                 .add(triangleAnim, "-=3.8")
-                .add(logoEverAnim, "-=0.4")
-                .add(logoMadeAnim, "-=1.3")
-                .add(logoSloganAnim, "-=1.3")
+                .add(logoEverAnim, "-=0.5")
+                .add(logoMadeAnim, "-=1.4")
+                .add(logoSloganAnim, "-=1.4")
                 .add(triangleFlashAnim, "+=1.5");
         }
     }, [starParticleAnim, gridAnim, triangleAnim, logoEverAnim, logoMadeAnim, logoSloganAnim, triangleFlashAnim]);
