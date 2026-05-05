@@ -5,8 +5,11 @@ import { useLoader, useFrame } from '@react-three/fiber'
 
 export default function Grid({ tl, ...props }) {
 
+    // Reference to the grid mesh to manipulate its properties for animation
     const meshRef = useRef()
+    const gridTexture = useLoader(THREE.TextureLoader, '/textures/bg-grid.png')
 
+    // The GSAP animation
     useLayoutEffect(() => {
         if (tl) {
             tl
@@ -46,7 +49,7 @@ export default function Grid({ tl, ...props }) {
                     color={0x343eff}
                     transparent={true}
                     opacity={0.5}
-                    map={useLoader(THREE.TextureLoader, '/textures/bg-grid.png')}
+                    map={gridTexture}
                     map-wrapS={THREE.RepeatWrapping}
                     map-wrapT={THREE.RepeatWrapping}
                     map-repeat={[60, 60]}
