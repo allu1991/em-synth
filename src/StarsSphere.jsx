@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo, useRef, useEffect } from 'react'
 import * as THREE from 'three'
 import { useTexture } from '@react-three/drei'
 
@@ -50,7 +50,7 @@ export default function StarsSphere(props) {
     const pointsRef = useRef()
 
     // Clean up the geometry and material when the component unmounts to prevent memory leaks
-    useMemo(() => {
+    useEffect(() => {
         return () => {
             geometry.dispose()
             material.dispose()
