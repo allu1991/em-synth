@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useLayoutEffect, useMemo } from 'react'
 import * as THREE from 'three'
-import { useGLTF } from '@react-three/drei'
 import { useLoader, useFrame } from '@react-three/fiber'
 
 export default function Grid({ tl, ...props }) {
@@ -63,5 +62,3 @@ export default function Grid({ tl, ...props }) {
         </group>
     )
 }
-
-useGLTF.preload('/grid-bg.glb')
