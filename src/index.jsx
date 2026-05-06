@@ -28,6 +28,7 @@ function Root() {
     const [isPerformanceMonitorOpen, setIsPerformanceMonitorOpen] = useState(false);
     const [noiseFilterEnabled, setNoiseFilterEnabled] = useState(true);
     const [chromaticAberrationEnabled, setChromaticAberrationEnabled] = useState(false);
+    const [scanLinesEnabled, setScanLinesEnabled] = useState(true);
     const [animationComplete, setAnimationComplete] = useState(false);
 
     // Bundle all context values into a single object to pass to the provider
@@ -42,6 +43,8 @@ function Root() {
         setNoiseFilterEnabled,
         chromaticAberrationEnabled,
         setChromaticAberrationEnabled,
+        scanLinesEnabled,
+        setScanLinesEnabled,
         animationComplete,
         setAnimationComplete
     };

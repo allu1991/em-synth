@@ -22,6 +22,8 @@ export default function Options() {
         setNoiseFilterEnabled,
         chromaticAberrationEnabled,
         setChromaticAberrationEnabled,
+        scanLinesEnabled,
+        setScanLinesEnabled,
         animationComplete,
     } = useContext(EffectsContext);
 
@@ -82,6 +84,10 @@ export default function Options() {
 
     const toggleChromaticAberration = () => {
         setChromaticAberrationEnabled(!chromaticAberrationEnabled);
+    }
+
+    const toggleScanLines = () => {
+        setScanLinesEnabled(!scanLinesEnabled)
     }
 
     return (
@@ -162,6 +168,16 @@ export default function Options() {
                                 type="checkbox"
                                 checked={chromaticAberrationEnabled}
                                 onChange={toggleChromaticAberration}
+                            />
+                            <span className="checkmark"></span>
+                        </label>
+
+                        <label className="label-container" id="options-scan-lines">
+                            <span className="input-label">Scan lines</span>
+                            <input
+                                type="checkbox"
+                                checked={scanLinesEnabled}
+                                onChange={toggleScanLines}
                             />
                             <span className="checkmark"></span>
                         </label>

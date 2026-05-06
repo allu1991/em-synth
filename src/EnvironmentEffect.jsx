@@ -1,9 +1,31 @@
 import { Environment } from '@react-three/drei'
 import { useControls } from 'leva'
 import { useRef, useContext } from 'react'
-import { EffectComposer, Bloom, Noise, ChromaticAberration } from '@react-three/postprocessing'
-import { KernelSize, Resolution } from 'postprocessing'
+import { EffectComposer, Bloom, Noise, ChromaticAberration, wrapEffect } from '@react-three/postprocessing'
+import { KernelSize, Resolution, Effect } from 'postprocessing'
+import { Uniform } from 'three'
 import { EffectsContext } from './index.jsx'
+
+// Scanlines effect — darkens alternating horizontal lines to simulate a CRT display
+class ScanLinesEffectImpl extends Effect {
+    constructor() {
+        super('ScanLinesEffect', /* glsl */`
+            uniform float uDensity;
+            uniform float uOpacity;
+
+            void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
+                float line = step(0.5, fract(gl_FragCoord.y / uDensity));
+                outputColor = vec4(inputColor.rgb * (1.0 - line * uOpacity), inputColor.a);
+            }
+        `, {
+            uniforms: new Map([
+                ['uDensity', new Uniform(6.0)],  // pixels per scanline pair
+                ['uOpacity', new Uniform(0.2)],  // darkness of dark lines (0–1)
+            ])
+        })
+    }
+}
+const ScanLinesEffect = wrapEffect(ScanLinesEffectImpl)
 
 export default function EnvironmentEffect({ tl }) {
 
@@ -11,6 +33,7 @@ export default function EnvironmentEffect({ tl }) {
     const {
         noiseFilterEnabled,
         chromaticAberrationEnabled,
+        scanLinesEnabled,
     } = useContext(EffectsContext);
 
     // Create refs for the environment and background to allow for future manipulations if needed
@@ -91,6 +114,10 @@ export default function EnvironmentEffect({ tl }) {
                     offset={ [ 0.00125, 0.00125 ] }
                 />
             )}
+
+            { scanLinesEnabled && (
+                <ScanLinesEffect />
+            ) }
         </EffectComposer>
     </>
 }
