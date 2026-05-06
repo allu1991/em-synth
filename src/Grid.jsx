@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useLayoutEffect, useMemo } from 'react'
+import React, { useRef, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import * as THREE from 'three'
 import { useLoader, useFrame } from '@react-three/fiber'
 
@@ -6,6 +6,9 @@ export default function Grid({ tl, ...props }) {
 
     // Reference to the grid mesh to manipulate its properties for animation
     const meshRef = useRef()
+
+    // State to track when the initial reveal animation is complete and the grid is ready to start its continuous movement
+    const [revealReady, setRevealReady] = useState(false);
 
     // Create the plane geometry once and reuse it to optimize performance
     const planeGeometry = useMemo(() => new THREE.PlaneGeometry(50, 50, 1, 1), [])
@@ -27,12 +30,15 @@ export default function Grid({ tl, ...props }) {
                     duration: 3.2,
                     ease: "power2.inOut"
                 }, "<")
+
+            // Set the revealReady state to true when the animation is complete to trigger the next phase of the app
+            tl.call(() => setRevealReady(true), null, "-=1")
         }
     }, [tl]);
 
     // Animate the grid by moving it along the z-axis repeatedly to create a continuous traversing effect
     useFrame((state, delta) => {
-        if (meshRef.current) {
+        if (meshRef.current && revealReady) {
             meshRef.current.position.z += delta * 4
             if (meshRef.current.position.z > 0) {
                 meshRef.current.position.z = -21.5
