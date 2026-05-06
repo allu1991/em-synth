@@ -53,6 +53,7 @@ export default function Grid({ tl, ...props }) {
                     color={0x343eff}
                     transparent={true}
                     opacity={0.5}
+                    depthWrite={false}
                     map={gridTexture}
                     map-wrapS={THREE.RepeatWrapping}
                     map-wrapT={THREE.RepeatWrapping}
