@@ -27,7 +27,7 @@ function Root() {
     const [isDebugMenuOpen, setIsDebugMenuOpen] = useState(false);
     const [isPerformanceMonitorOpen, setIsPerformanceMonitorOpen] = useState(false);
     const [noiseFilterEnabled, setNoiseFilterEnabled] = useState(true);
-    const [chromaticAberrationEnabled, setChromaticAberrationEnabled] = useState(false);
+    const [chromaticAberrationEnabled, setChromaticAberrationEnabled] = useState(true);
     const [scanLinesEnabled, setScanLinesEnabled] = useState(true);
     const [animationComplete, setAnimationComplete] = useState(false);
 
