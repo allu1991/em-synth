@@ -35,7 +35,7 @@ export default function Grid({ tl, ...props }) {
         if (meshRef.current) {
             meshRef.current.position.z += delta * 4
             if (meshRef.current.position.z > 0) {
-                meshRef.current.position.z = -22.5
+                meshRef.current.position.z = -21.5
             }
         }
     })
@@ -44,7 +44,7 @@ export default function Grid({ tl, ...props }) {
         <group {...props}>
             <mesh
                 ref={meshRef}
-                position={[0, -2.5, -22.5]}
+                position={[0, -2.5, -21.5]}
                 rotation={[-Math.PI / 2, 0, 0]}
                 geometry={planeGeometry}
             >
