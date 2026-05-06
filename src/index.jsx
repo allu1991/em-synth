@@ -46,11 +46,16 @@ function Root() {
         setAnimationComplete
     };
 
+    // Scene rendering resolution. DPR clamps render pixel ratio:
+    // 1.0 = one pixel per CSS pixel, 0.5 = half density.
+    // Retina screens have native dpr of 2.0
+    const sceneResolution = [0.5, 1];
+
     return (
         <EffectsContext.Provider value={contextValues}>
             <StrictMode>
                 <Leva hidden={!isDebugMenuOpen} />
-                <Canvas>
+                <Canvas dpr={sceneResolution}>
                     { isPerformanceMonitorOpen && <Perf position="top-left" /> }
                     <Suspense fallback={null}>
                         <App />
