@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "deploy": "vite build && gh-pages -d dist"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.3",
