@@ -36,4 +36,4 @@ export default function LogoEver({ tl, ...props }) {
     )
 }
 
-useGLTF.preload('/logo-ever.glb')
+useGLTF.preload('./logo-ever.glb')

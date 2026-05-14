@@ -64,4 +64,4 @@ export default function Triangle({ tl, tlTwo, ...props }) {
     )
 }
 
-useGLTF.preload('/logo-triangle.glb')
+useGLTF.preload('./logo-triangle.glb')

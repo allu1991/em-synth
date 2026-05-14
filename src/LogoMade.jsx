@@ -6,7 +6,7 @@ import { useLoader } from '@react-three/fiber'
 export default function LogoMade({ tl, ...props }) {
 
     // Load the glTF model
-    const { nodes, materials } = useGLTF('/logo-made.glb')
+    const { nodes, materials } = useGLTF('./logo-made.glb')
 
     // Animate the logoEver using GSAP when the timeline (tl) is available
     useLayoutEffect(() => {
@@ -71,4 +71,4 @@ export default function LogoMade({ tl, ...props }) {
     )
 }
 
-useGLTF.preload('/logo-made.glb')
+useGLTF.preload('./logo-made.glb')

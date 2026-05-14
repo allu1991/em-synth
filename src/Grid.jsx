@@ -14,7 +14,7 @@ export default function Grid({ tl, ...props }) {
     const planeGeometry = useMemo(() => new THREE.PlaneGeometry(50, 50, 1, 1), [])
 
     // Load the grid texture and set it to repeat to create a seamless pattern
-    const gridTexture = useLoader(THREE.TextureLoader, '/textures/bg-grid.png')
+    const gridTexture = useLoader(THREE.TextureLoader, './textures/bg-grid.png')
 
     // The GSAP animation
     useLayoutEffect(() => {
