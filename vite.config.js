@@ -38,6 +38,19 @@ export default {
     {
         outDir: '../dist', // Output in the dist/ folder
         emptyOutDir: true, // Empty the folder first
-        sourcemap: true // Add sourcemap
+        sourcemap: true, // Add sourcemap
+        rollupOptions:
+        {
+            output:
+            {
+                manualChunks:
+                {
+                    'vendor-react': ['react', 'react-dom'],
+                    'vendor-three': ['three'],
+                    'vendor-r3f': ['@react-three/fiber', '@react-three/drei', '@react-three/postprocessing'],
+                    'vendor-gsap': ['gsap', '@gsap/react'],
+                }
+            }
+        }
     },
 }
