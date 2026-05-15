@@ -1,4 +1,4 @@
-import{r as re}from"./vendor-r3f-BmlzSkhD.js";function mt(u){if(u===void 0)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return u}function Ni(u,t){u.prototype=Object.create(t.prototype),u.prototype.constructor=u,u.__proto__=t}/*!
+import{r as re}from"./vendor-r3f-Bg4yy4Wl.js";function mt(u){if(u===void 0)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return u}function Ni(u,t){u.prototype=Object.create(t.prototype),u.prototype.constructor=u,u.__proto__=t}/*!
  * GSAP 3.15.0
  * https://gsap.com
  *
@@ -21,4 +21,4 @@ import{r as re}from"./vendor-r3f-BmlzSkhD.js";function mt(u){if(u===void 0)throw
  * Club GSAP members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */let Li=typeof document<"u"?re.useLayoutEffect:re.useEffect,Ii=u=>u&&!Array.isArray(u)&&typeof u=="object",ge=[],rs={},Fr=zr;const Lr=(u,t=ge)=>{let e=rs;Ii(u)?(e=u,u=null,t="dependencies"in e?e.dependencies:ge):Ii(t)&&(e=t,t="dependencies"in e?e.dependencies:ge),u&&typeof u!="function"&&console.warn("First parameter must be a function or config object");const{scope:i,revertOnUpdate:r}=e,n=re.useRef(!1),s=re.useRef(Fr.context(()=>{},i)),a=re.useRef(f=>s.current.add(null,f)),o=t&&t.length&&!r;return o&&Li(()=>(n.current=!0,()=>s.current.revert()),ge),Li(()=>{if(u&&s.current.add(u,i),!o||!n.current)return()=>s.current.revert()},t),{context:s.current,contextSafe:a.current}};Lr.register=u=>{Fr=u};Lr.headless=!0;export{zr as g,Lr as u};
-//# sourceMappingURL=vendor-gsap-anp7fbHu.js.map
+//# sourceMappingURL=vendor-gsap-NAF_Jmqq.js.map
