@@ -1,7 +1,7 @@
 import { Environment } from '@react-three/drei'
 import { useControls } from 'leva'
 import { useRef, useContext } from 'react'
-import { EffectComposer, Bloom, Noise, ChromaticAberration, wrapEffect } from '@react-three/postprocessing'
+import { EffectComposer, Bloom, Noise, ChromaticAberration, wrapEffect, Vignette } from '@react-three/postprocessing'
 import { KernelSize, Resolution, Effect } from 'postprocessing'
 import { Uniform } from 'three'
 import { EffectsContext } from './index.jsx'
@@ -118,6 +118,8 @@ export default function EnvironmentEffect({ tl }) {
             { scanLinesEnabled && (
                 <ScanLinesEffect />
             ) }
+
+            <Vignette eskil={ false } offset={ 0.5 } darkness={ 0.55 } />
         </EffectComposer>
     </>
 }
